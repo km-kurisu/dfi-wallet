@@ -1,103 +1,109 @@
-import Image from "next/image";
+import Link from "next/link";
+import { FaUserPlus, FaWallet, FaIdCard, FaReact, FaCss3Alt, FaEthereum, FaMobile } from 'react-icons/fa';
+import { SiNextdotjs, SiTailwindcss, SiFramer } from 'react-icons/si';
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <div className="max-w-4xl mx-auto px-2 sm:px-4">
+        {/* Sticky CTA bar under the navbar - mobile responsive */}
+        <div className="sticky top-16 z-40 flex justify-center py-3">
+          <nav className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-xl p-2 sm:p-3 shadow-2xl">
+            <Link href="/onboarding" className="px-3 py-2 bg-indigo-600 text-white text-sm sm:text-base rounded-lg hover:bg-indigo-700 flex items-center gap-2 transition-colors">
+              <FaUserPlus className="flex-shrink-0" />
+              <span>Get Started</span>
+            </Link>
+            <Link href="/wallet" className="px-3 py-2 bg-violet-600 text-white text-sm sm:text-base rounded-lg hover:bg-violet-700 flex items-center gap-2 transition-colors">
+              <FaWallet className="flex-shrink-0" />
+              <span>Wallet</span>
+            </Link>
+            <Link href="/verify" className="px-3 py-2 bg-fuchsia-600 text-white text-sm sm:text-base rounded-lg hover:bg-fuchsia-700 flex items-center gap-2 transition-colors">
+              <FaIdCard className="flex-shrink-0" />
+              <span className="whitespace-nowrap">ID Verify</span>
+            </Link>
+          </nav>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <header className="my-8 sm:my-12 text-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-slate-900 dark:text-slate-100 leading-tight">Digital Financial Inclusion for the Unbanked</h1>
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-2xl mx-auto">Mobile-first wallets, lightweight blockchain integration, and privacy-preserving digital identity verification to reduce onboarding friction for underserved populations.</p>
+        </header>
+
+  <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
+          <div className="p-4 sm:p-6 rounded-2xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-2xl transition-transform hover:scale-[1.01]">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mb-2">Project overview</h2>
+            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">This project demonstrates a practitioner-ready front-end that combines mobile-friendly UX, wallet connectivity (MetaMask), and a mock identity verification flow. The goal is to make basic financial services accessible to people without traditional banking.</p>
+          </div>
+
+          <div className="p-4 sm:p-6 rounded-2xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-2xl transition-transform hover:scale-[1.01]">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mb-2">Key features</h2>
+            <ul className="list-disc pl-5 text-sm sm:text-base text-slate-700 dark:text-slate-300 space-y-1">
+              <li>Onboarding form with minimal fields and progressive verification.</li>
+              <li>Blockchain wallet connect (MetaMask) for secure payments/identity anchors.</li>
+              <li>Digital identity verification mock (file upload + status) to illustrate flow.</li>
+              <li>Dark/light theme with accessible colors and glass UI elements.</li>
+            </ul>
+          </div>
+        </section>
+
+  <section className="mb-8 sm:mb-12">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mb-3">Technology stack</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="p-3 sm:p-4 rounded-xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-xl transition-all hover:bg-white/30 dark:hover:bg-slate-900/30">
+              <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                <SiNextdotjs className="text-xl sm:text-2xl text-slate-900 dark:text-slate-100" />
+                <strong className="text-sm sm:text-base">Framework</strong>
+              </div>
+              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Next.js (App Router, JavaScript)</p>
+            </div>
+            <div className="p-3 sm:p-4 rounded-xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-xl transition-all hover:bg-white/30 dark:hover:bg-slate-900/30">
+              <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                <SiTailwindcss className="text-xl sm:text-2xl text-slate-900 dark:text-slate-100" />
+                <strong className="text-sm sm:text-base">Styling</strong>
+              </div>
+              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Tailwind CSS (class-based dark mode)</p>
+            </div>
+            <div className="p-3 sm:p-4 rounded-xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-xl transition-all hover:bg-white/30 dark:hover:bg-slate-900/30">
+              <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                <FaEthereum className="text-xl sm:text-2xl text-slate-900 dark:text-slate-100" />
+                <strong className="text-sm sm:text-base">Wallet</strong>
+              </div>
+              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">MetaMask/Ethereum via window.ethereum</p>
+            </div>
+            <div className="p-3 sm:p-4 rounded-xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-xl transition-all hover:bg-white/30 dark:hover:bg-slate-900/30">
+              <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                <SiFramer className="text-xl sm:text-2xl text-slate-900 dark:text-slate-100" />
+                <strong className="text-sm sm:text-base">Other</strong>
+              </div>
+              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Framer Motion for animation (optional), PostCSS configuration for Tailwind</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-8 sm:mb-12 bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-xl p-4 sm:p-6 shadow-xl">
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mb-3">How to try it</h3>
+          <ol className="list-decimal pl-5 sm:pl-6 text-sm sm:text-base text-slate-700 dark:text-slate-300 space-y-2">
+            <li>Open <strong>Get Started</strong> to simulate onboarding and identity verification.</li>
+            <li>Use <strong>Wallet</strong> to connect MetaMask (or a browser wallet) to test account flows.</li>
+            <li>Toggle theme using the floating button or navbar toggle to test light/dark modes.</li>
+          </ol>
+        </section>
+
+        <nav className="p-3 flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center mb-8">
+          <Link href="/onboarding" className="px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center justify-center gap-2 transition-colors shadow-md hover:shadow-lg">
+            <FaUserPlus />
+            <span className="font-medium">Get Started</span>
+          </Link>
+          <Link href="/wallet" className="px-4 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 flex items-center justify-center gap-2 transition-colors shadow-md hover:shadow-lg">
+            <FaWallet />
+            <span className="font-medium">Wallet</span>
+          </Link>
+          <Link href="/verify" className="px-4 py-3 bg-fuchsia-600 text-white rounded-lg hover:bg-fuchsia-700 flex items-center justify-center gap-2 transition-colors shadow-md hover:shadow-lg">
+            <FaIdCard />
+            <span className="font-medium">Identity Verification</span>
+          </Link>
+        </nav>
+      </div>
+    </main>
   );
 }

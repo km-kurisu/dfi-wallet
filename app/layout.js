@@ -1,6 +1,14 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { AuthContextProvider } from "../contexts/AuthContext";
+import Providers from "../components/Providers";
+import FloatingThemeToggle from "../components/FloatingThemeToggle";
+import { ThemePositionProvider } from "../contexts/ThemePositionContext";
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,11 +26,37 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-300`}>
+        {/* Inline script to set theme before React hydration to avoid flash */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            try {
+              var saved = localStorage.getItem('theme');
+              var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+              if (saved === 'dark' || (!saved && prefersDark)) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            } catch (e) { /* ignore */ }
+          })();
+        ` }} />
+                <AuthContextProvider>
+          <Providers>
+            <ThemePositionProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-grow">{children}</main>
+                <Footer />
+                <FloatingThemeToggle />
+              </div>
+            </ThemePositionProvider>
+          </Providers>
+        </AuthContextProvider>
       </body>
     </html>
   );
