@@ -1,10 +1,13 @@
+"use client";
 import Link from "next/link";
 import { FaUserPlus, FaWallet, FaIdCard, FaReact, FaCss3Alt, FaEthereum, FaMobile } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiFramer } from 'react-icons/si';
+import HomeRedirect from "./HomeRedirect";
 
 export default function Home() {
   return (
     <main className="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <HomeRedirect />
       <div className="max-w-4xl mx-auto px-2 sm:px-4">
         {/* Sticky CTA bar under the navbar - mobile responsive */}
         <div className="sticky top-16 z-40 flex justify-center py-3">

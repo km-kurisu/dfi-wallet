@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from "next/link";
 import ThemeToggle from './ThemeToggle';
 import { FaHome, FaUserPlus, FaWallet, FaIdCard, FaSignInAlt, FaUser, FaSignOutAlt } from 'react-icons/fa';
@@ -8,6 +8,29 @@ import { useAuth } from '../contexts/AuthContext';
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, logout } = useAuth();
+  const menuRef = useRef(null);
+  
+  // Handle clicking outside the menu to close it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (open && menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    
+    // Lock/unlock body scroll
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open]);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-2xl bg-white/20 dark:bg-slate-900/20 border-b border-white/20 dark:border-slate-800/30 shadow-2xl">
@@ -44,27 +67,26 @@ export default function Navbar() {
                 <FaIdCard className="text-sm" />
                 Verify
               </Link>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-700 dark:text-slate-200 flex items-center gap-1">
-                  <FaUser className="text-sm" />
-                  {user.displayName || user.email}
-                </span>
-                <button 
-                  onClick={logout}
-                  className="text-slate-700 dark:text-slate-200 hover:text-red-600 dark:hover:text-red-400 transition flex items-center gap-1"
-                >
-                  <FaSignOutAlt className="text-sm" />
-                  Logout
-                </button>
-              </div>
+              <Link href="/profile" className="text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center gap-1">
+                <FaUser className="text-sm" />
+                Profile
+              </Link>
+              <button 
+                onClick={logout}
+                className="text-slate-700 dark:text-slate-200 hover:text-red-600 dark:hover:text-red-400 transition flex items-center gap-1"
+              >
+                <FaSignOutAlt className="text-sm" />
+                Logout
+              </button>
             </>
           )}
-          <ThemeToggle />
+          <div className="ml-2 border-l border-slate-200 dark:border-slate-700 pl-4">
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Mobile controls */}
-        <div className="flex items-center md:hidden gap-3">
-          <ThemeToggle />
+        <div className="flex items-center md:hidden">
           <button 
             aria-label="Toggle menu" 
             onClick={() => setOpen(!open)} 
@@ -78,10 +100,19 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+      
+      {/* Backdrop for mobile menu */}
+      <div 
+        className={`md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        style={{ zIndex: 40 }}
+        onClick={() => setOpen(false)}
+      />
 
       {/* Mobile menu with animation */}
-      <div className={`md:hidden fixed inset-x-0 top-[61px] transform ${open ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} transition-all duration-300 ease-in-out z-50`}>
-        <div className="px-4 py-4 space-y-3 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-t border-b border-white/20 dark:border-slate-800/30 shadow-xl">
+      <div 
+        ref={menuRef}
+        className={`md:hidden fixed inset-x-0 top-[61px] transform ${open ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'} transition-all duration-300 ease-in-out z-50`}>
+        <div className="px-4 py-4 space-y-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-b border-white/20 dark:border-slate-800/30 shadow-2xl">
           <Link 
             href="/" 
             className="flex items-center gap-2 p-3 rounded-lg text-slate-800 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-800/40 transition-all"
@@ -143,6 +174,14 @@ export default function Navbar() {
                 <FaIdCard className="text-fuchsia-600 dark:text-fuchsia-400" />
                 <span>Verify</span>
               </Link>
+              <Link 
+                href="/profile" 
+                className="flex items-center gap-2 p-3 rounded-lg text-slate-800 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-800/40 transition-all"
+                onClick={() => setOpen(false)}
+              >
+                <FaUser className="text-emerald-600 dark:text-emerald-400" />
+                <span>Profile</span>
+              </Link>
               <button 
                 onClick={() => {
                   logout();
@@ -155,6 +194,11 @@ export default function Navbar() {
               </button>
             </>
           )}
+          
+          {/* Theme Toggle for mobile menu */}
+          <div className="p-3 border-t border-slate-200/30 dark:border-slate-800/30 mt-2">
+            <ThemeToggle />
+          </div>
           
           {/* Close button at bottom */}
           <button 

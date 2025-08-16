@@ -4,9 +4,9 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { AuthContextProvider } from "../contexts/AuthContext";
+import { BlockchainWalletProvider } from "../contexts/BlockchainWalletContext";
 import Providers from "../components/Providers";
 import FloatingThemeToggle from "../components/FloatingThemeToggle";
-import { ThemePositionProvider } from "../contexts/ThemePositionContext";
 
 
 const geistSans = Geist({
@@ -47,14 +47,14 @@ export default function RootLayout({ children }) {
         ` }} />
                 <AuthContextProvider>
           <Providers>
-            <ThemePositionProvider>
+            <BlockchainWalletProvider>
               <div className="flex flex-col min-h-screen">
                 <Navbar />
                 <main className="flex-grow">{children}</main>
                 <Footer />
                 <FloatingThemeToggle />
               </div>
-            </ThemePositionProvider>
+            </BlockchainWalletProvider>
           </Providers>
         </AuthContextProvider>
       </body>
