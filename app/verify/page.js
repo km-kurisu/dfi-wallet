@@ -123,9 +123,10 @@ export default function Verify() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="w-full max-w-[340px] sm:max-w-md bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 p-5 sm:p-6 md:p-8 rounded-2xl shadow-2xl">
-  <div className="text-center mb-6">
+    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 overflow-guard flex items-center justify-center">
+      <div className="responsive-container max-w-md mx-auto my-12">
+        <div className="card card-body">
+  <div className="text-center mb-6 section">
     <FaIdCard className="text-3xl sm:text-4xl text-fuchsia-600 dark:text-fuchsia-400 mx-auto mb-2" />
     <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100">Digital Identity Verification</h2>
   </div>
@@ -305,6 +306,7 @@ export default function Verify() {
     <FaArrowLeft className="flex-shrink-0" />
     <span>Back to Home</span>
   </Link>
+        </div>
       </div>
     </main>
   );

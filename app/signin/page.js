@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaSignInAlt, FaEnvelope, FaLock, FaArrowLeft } from 'react-icons/fa';
+import { FaSignInAlt, FaEnvelope, FaLock, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function SignIn() {
@@ -12,6 +12,7 @@ export default function SignIn() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const { signin, signInWithGoogle } = useAuth();
   const router = useRouter();
 
@@ -53,7 +54,7 @@ export default function SignIn() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 bg-white dark:bg-slate-950 transition-colors duration-300">
-      <div className="w-full max-w-md sm:max-w-sm bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl border border-white/20 dark:border-slate-800/30 p-6 sm:p-8 rounded-2xl shadow-2xl">
+      <div className="w-full max-w-md sm:max-w-sm bg-white dark:bg-slate-900/50 backdrop-blur-xl border border-white/20 dark:border-slate-800/30 p-6 sm:p-8 rounded-2xl shadow-2xl">
   <div className="text-center mb-6">
     <FaSignInAlt className="text-4xl text-indigo-600 dark:text-indigo-400 mx-auto mb-2" />
     <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Sign In</h2>
@@ -65,28 +66,33 @@ export default function SignIn() {
             </div>
           )}
           <div className="relative">
-            <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
             <input 
               type="email" 
               name="email"
               placeholder="Email Address" 
               value={formData.email}
               onChange={handleChange}
-              className="w-full pl-10 border border-white/20 dark:border-slate-700/50 p-3 rounded-xl bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50" 
+              className="w-full p-3 border border-white/20 dark:border-slate-700/50 rounded-xl text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50" 
               required 
             />
           </div>
           <div className="relative">
-            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
             <input 
-              type="password" 
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password" 
               value={formData.password}
               onChange={handleChange}
-              className="w-full pl-10 border border-white/20 dark:border-slate-700/50 p-3 rounded-xl bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50" 
+              className="w-full p-3 pr-10 border border-white/20 dark:border-slate-700/50 rounded-xl text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50" 
               required 
             />
+            <button 
+              type="button" 
+              onClick={() => setShowPassword(!showPassword)} 
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 focus:outline-none"
+            >
+              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+            </button>
           </div>
           <button 
             type="submit" 
@@ -103,7 +109,7 @@ export default function SignIn() {
               <div className="w-full border-t border-white/20 dark:border-slate-700/50"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white/30 dark:bg-slate-900/30 text-slate-600 dark:text-slate-400">
+              <span className="px-2 bg-white dark:bg-slate-900/30 text-slate-600 dark:text-slate-400">
                 Or continue with
               </span>
             </div>

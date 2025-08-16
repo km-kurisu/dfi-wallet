@@ -84,7 +84,8 @@ export const AuthContextProvider = ({ children }) => {
         createdAt: new Date().toISOString(),
         walletAddress: null,
         isVerified: false,
-        onboardingCompleted: false
+        onboardingCompleted: false,
+        defaultHomepage: 'wallet'
       });
 
       return { success: true, user: userCredential.user };
@@ -148,7 +149,8 @@ export const AuthContextProvider = ({ children }) => {
           walletAddress: null,
           isVerified: false,
           onboardingCompleted: false,
-          provider: 'google'
+          provider: 'google',
+          defaultHomepage: 'wallet'
         });
       }
       

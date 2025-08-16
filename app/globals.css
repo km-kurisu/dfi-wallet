@@ -1,33 +1,477 @@
 
 @import "tailwindcss";
 
+/* Base styles to improve mobile experience */
+html {
+  -webkit-text-size-adjust: 100%; /* Prevent text size adjustment after orientation changes in iOS */
+  touch-action: manipulation; /* Prevent delays on click events */
+  height: -webkit-fill-available; /* Fix for iOS height issue */
+}
+
 body {
-  background-color: #ffffff;
-  color: #0f172a;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+}
+
+:root {
+  /* Light mode colors */
+  --primary: #0088ff;
+  --primary-light: #3aabff;
+  --primary-dark: #0072d6;
+  --primary-bg: #f0f7ff;
+  --primary-contrast: #ffffff;
+
+  --secondary: #8a4ef5;
+  --secondary-light: #b182fa;
+  --secondary-dark: #652dc0;
+  --secondary-bg: #f5f0ff;
+  --secondary-contrast: #ffffff;
+
+  --background: #ffffff;
+  --foreground: #1a202c;
+  --card-bg: #ffffff;
+  --card-border: rgba(26, 32, 44, 0.05);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark {
+  /* Dark mode colors */
+  --primary: #3aabff;
+  --primary-light: #7cc7ff;
+  --primary-dark: #0072d6;
+  --primary-bg: #00244d;
+  --primary-contrast: #ffffff;
+
+  --secondary: #b182fa;
+  --secondary-light: #caabfc;
+  --secondary-dark: #7a37e0;
+  --secondary-bg: #2c114e;
+  --secondary-contrast: #ffffff;
+
+  --background: #1a202c;
+  --foreground: #f7fafc;
+  --card-bg: #2d3748;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+  width: 100%;
 }
 
-/* Dark-mode fallback for body when `html.dark` is present */
-html.dark body {
-  background-color: #0f172a;
-  color: #f8fafc;
+/* Improve mobile scaling */
+html {
+  box-sizing: border-box;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Navbar-specific overrides so links and brand switch colors with theme */
-html.dark nav .font-bold,
-html.dark nav a {
-  color: #e6eef8 !important; /* light slate */
-}
-html.dark nav a:hover {
-  color: #93c5fd !important; /* light blue on hover */
+*, *::before, *::after {
+  box-sizing: inherit;
+  max-width: 100%;
 }
 
-html:not(.dark) nav .font-bold,
-html:not(.dark) nav a {
-  color: #0f172a !important; /* dark text in light mode */
+/* Responsive media handling */
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
-html:not(.dark) nav a:hover {
-  color: #4f46e5 !important; /* indigo hover in light mode */
+
+/* Base Components */
+/* Navbar styling */
+.nav-link {
+  color: var(--foreground);
+  transition: color 0.2s ease;
+}
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-link-active {
+  color: var(--primary-dark);
+  font-weight: 500;
+}
+.dark .nav-link-active {
+  color: var(--primary-light);
+}
+
+/* Brand styling */
+.brand-text {
+  color: var(--foreground);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.dark .brand-text {
+  color: #fff;
+}
+
+/* Responsive text utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Container and section styles */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .section {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .section {
+    margin-bottom: 4rem;
+  }
+}
+
+/* Responsive container - prevents overflow on small screens */
+.responsive-container {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  /* Improve text readability on small screens */
+  h1, h2, h3 {
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* Prevent horizontal overflow */
+  .overflow-guard {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Better touch targets */
+  button, 
+  a.btn,
+  .nav-link,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce padding on mobile */
+  .mobile-reduce-padding {
+    padding: 0.75rem !important;
+  }
+  
+  /* Scale down too large text */
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: 1.35rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Fix cards and containers */
+  .card, .container, .section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  /* Reduce images and icons to prevent overflow */
+  img, svg {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Fix sticky elements */
+  .sticky {
+    position: sticky;
+    z-index: 40;
+  }
+  
+  /* Adjust font size for form inputs */
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Fix for bottom-fixed elements to account for mobile browser UI */
+  .fixed-bottom {
+    bottom: env(safe-area-inset-bottom, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0.5rem);
+  }
+  
+  /* Add safe area insets for notches and home indicators */
+  .safe-area-padding {
+    padding-left: env(safe-area-inset-left, 1rem);
+    padding-right: env(safe-area-inset-right, 1rem);
+    padding-top: env(safe-area-inset-top, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+/* Button styles */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-contrast);
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-dark);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+.btn-outline:hover {
+  background-color: var(--primary-bg);
+}
+
+/* Card styles */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Card parts */
+.card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--card-border);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Responsive card adjustments */
+@media (max-width: 640px) {
+  .card {
+    border-radius: 0.375rem;
+  }
+  
+  .card-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-footer {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Input styles */
+input,
+textarea,
+select {
+  background-color: var(--card-bg);
+  color: var(--foreground);
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--card-border);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Background utilities */
+.bg-primary {
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+}
+.bg-primary-light {
+  background-color: var(--primary-light);
+  color: var(--primary-contrast);
+}
+.bg-primary-dark {
+  background-color: var(--primary-dark);
+  color: var(--primary-contrast);
+}
+.bg-primary-bg {
+  background-color: var(--primary-bg);
+  color: var(--foreground);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-contrast);
+}
+.bg-secondary-light {
+  background-color: var(--secondary-light);
+  color: var(--secondary-contrast);
+}
+.bg-secondary-dark {
+  background-color: var(--secondary-dark);
+  color: var(--secondary-contrast);
+}
+.bg-secondary-bg {
+  background-color: var(--secondary-bg);
+  color: var(--foreground);
+}
+
+/* Text utilities */
+.text-primary {
+  color: var(--primary);
+}
+.text-primary-light {
+  color: var(--primary-light);
+}
+.text-primary-dark {
+  color: var(--primary-dark);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+.text-secondary-light {
+  color: var(--secondary-light);
+}
+.text-secondary-dark {
+  color: var(--secondary-dark);
+}
+
+.text-foreground {
+  color: var(--foreground);
+}
+
+/* Mobile menu - theme-specific styles */
+.mobile-menu {
+  background-color: var(--background);
+  border-color: var(--card-border);
+}
+
+.mobile-menu-link {
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+  transition: all 0.2s ease;
+}
+.mobile-menu-link:hover {
+  background-color: var(--primary-dark);
+}
+
+.mobile-menu-link-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-contrast);
+}
+.mobile-menu-link-secondary:hover {
+  background-color: var(--secondary-dark);
+}
+
+/* Glass effect styling */
+.glass {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background-color: rgba(26, 32, 44, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Main background colors - ensure proper switching */

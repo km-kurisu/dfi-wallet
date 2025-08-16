@@ -300,10 +300,11 @@ export default function Wallet() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-4 sm:p-6 md:p-8 bg-white dark:bg-slate-950 transition-colors duration-300">
+    <main className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 overflow-guard">
       <MetaMaskPrompt show={showMetaMaskPrompt} onClose={handleCloseMetaMaskPrompt} />
-      <div className="w-full max-w-[340px] sm:max-w-md md:max-w-lg bg-white dark:bg-slate-800/50 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 p-5 sm:p-6 md:p-8 rounded-2xl shadow-lg flex flex-col items-center mt-12">
-        <div className="text-center mb-6">
+      <div className="responsive-container max-w-lg mx-auto mt-12">
+        <div className="card card-body flex flex-col items-center">
+  <div className="text-center mb-6 section">
           <FaWallet className="text-3xl sm:text-4xl text-violet-600 dark:text-violet-400 mx-auto mb-2" />
           <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-slate-100">Blockchain Wallet</h2>
           {account && (
@@ -641,6 +642,7 @@ export default function Wallet() {
           <FaArrowLeft className="flex-shrink-0" />
           <span>Back to Home</span>
         </Link>
+        </div>
       </div>
     </main>
   );

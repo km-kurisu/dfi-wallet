@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-300`}>
         {/* Inline script to set theme before React hydration to avoid flash */}

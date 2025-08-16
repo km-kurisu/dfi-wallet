@@ -143,10 +143,10 @@ export default function Profile() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center p-4 sm:p-6 md:p-8 bg-white dark:bg-slate-950 transition-colors duration-300">
-      <div className="w-full max-w-3xl mt-12 mb-8">
+    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 overflow-guard">
+      <div className="responsive-container max-w-3xl mx-auto mt-12 mb-8">
         {/* Profile Header */}
-        <div className="relative w-full p-6 sm:p-8 bg-white dark:bg-slate-800/50 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 rounded-2xl shadow-lg mb-6">
+  <div className="relative w-full card card-header card-body mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center">
             <div className="w-20 h-20 bg-indigo-100 dark:bg-indigo-900/20 rounded-full flex items-center justify-center mb-4 sm:mb-0 sm:mr-6">
               {user.photoURL ? (
@@ -237,10 +237,10 @@ export default function Profile() {
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 section">
           {/* User Details */}
           <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-slate-800/50 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 shadow-lg">
+            <div className="card card-body mb-6">
               <h2 className="text-lg font-semibold text-black dark:text-slate-100 mb-4 flex items-center">
                 <FaUser className="mr-2 text-indigo-500 dark:text-indigo-400" />
                 Personal Information
@@ -276,7 +276,7 @@ export default function Profile() {
               </button>
             </div>
 
-            <div className="bg-white dark:bg-slate-800/50 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 shadow-lg mt-6">
+            <div className="card card-body mt-6">
               <h2 className="text-lg font-semibold text-black dark:text-slate-100 mb-4 flex items-center">
                 <FaIdCard className="mr-2 text-indigo-500 dark:text-indigo-400" />
                 Verification Status
@@ -309,12 +309,14 @@ export default function Profile() {
                 </Link>
               )}
             </div>
+
+
           </div>
 
           {/* Wallet and Activity */}
           <div className="lg:col-span-2 space-y-6">
             {/* Wallet Section */}
-            <div className="bg-white dark:bg-slate-800/50 backdrop-blur-xl border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 shadow-lg">
+            <div className="card card-body">
               <h2 className="text-lg font-semibold text-black dark:text-slate-100 mb-4 flex items-center">
                 <FaWallet className="mr-2 text-indigo-500 dark:text-indigo-400" />
                 Blockchain Wallet

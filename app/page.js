@@ -1,14 +1,27 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
-import { FaUserPlus, FaWallet, FaIdCard, FaReact, FaCss3Alt, FaEthereum, FaMobile } from 'react-icons/fa';
+import { FaUserPlus, FaWallet, FaIdCard, FaReact, FaCss3Alt, FaEthereum, FaMobile, FaHome } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiFramer } from 'react-icons/si';
 import HomeRedirect from "./HomeRedirect";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Home() {
+  const { user } = useAuth();
+
+  // Allow the user to set this page as their home
+  const setAsHome = () => {
+    localStorage.setItem('skipHomeRedirect', 'true');
+    // Give feedback to the user
+    alert('Home page set as your default landing page!');
+  };
+
   return (
     <main className="min-h-screen p-4 sm:p-6 md:p-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <HomeRedirect />
       <div className="max-w-4xl mx-auto px-2 sm:px-4">
+        
+        {/* Home preference setting for logged in users */}
         {/* Sticky CTA bar under the navbar - mobile responsive */}
         <div className="sticky top-16 z-40 flex justify-center py-3">
           <nav className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-xl p-2 sm:p-3 shadow-2xl">
@@ -28,8 +41,8 @@ export default function Home() {
         </div>
 
         <header className="my-8 sm:my-12 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-slate-900 dark:text-slate-100 leading-tight">Digital Financial Inclusion for the Unbanked</h1>
-          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-2xl mx-auto">Mobile-first wallets, lightweight blockchain integration, and privacy-preserving digital identity verification to reduce onboarding friction for underserved populations.</p>
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-slate-900 dark:text-white leading-tight">Digital Financial Inclusion for the Unbanked</h1>
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-200 max-w-2xl mx-auto">Mobile-first wallets, lightweight blockchain integration, and privacy-preserving digital identity verification to reduce onboarding friction for underserved populations.</p>
         </header>
 
   <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
