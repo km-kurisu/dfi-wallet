@@ -54,13 +54,13 @@ export default function Onboarding() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-6 md:p-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="w-full max-w-[340px] sm:max-w-md bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 p-5 sm:p-6 md:p-8 rounded-2xl shadow-2xl">
-  <div className="text-center mb-6">
-    <FaUserPlus className="text-3xl sm:text-4xl text-indigo-600 dark:text-indigo-400 mx-auto mb-2" />
-    <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100">Create Your Account</h2>
-  </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-white to-slate-200 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+      <div className="mx-auto w-[340px] h-auto min-h-[480px] max-w-[90vw] bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl p-5 flex flex-col gap-4">
+        <div className="text-center mb-4">
+          <FaUserPlus className="text-3xl text-indigo-600 dark:text-indigo-400 mx-auto mb-1" />
+          <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Create Account</h2>
+        </div>
+  <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
               {error}
@@ -109,13 +109,13 @@ export default function Onboarding() {
           <button 
             type="submit" 
             disabled={loading}
-            className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow transition-all duration-200 mt-1 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Creating Account...' : 'Onboard'}
           </button>
         </form>
         
-        <div className="mt-6">
+  <div className="mt-4">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-white/20 dark:border-slate-700/50"></div>
@@ -131,7 +131,7 @@ export default function Onboarding() {
             type="button"
             onClick={handleGoogleSignIn}
             disabled={loading}
-            className="w-full mt-4 flex items-center justify-center gap-2 bg-white text-slate-800 dark:bg-slate-800 dark:text-white px-4 py-2 border border-slate-300 dark:border-slate-700 rounded hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full mt-3 flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-200 shadow disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -143,12 +143,12 @@ export default function Onboarding() {
           </button>
         </div>
         
-        <p className="mt-6 text-center text-slate-700 dark:text-slate-300">
+  <p className="mt-4 text-center text-slate-700 dark:text-slate-300 text-xs">
           Already have an account?{' '}
           <Link href="/signin" className="text-indigo-600 hover:underline">Sign In</Link>
         </p>
         
-        <Link href="/" className="mt-6 text-indigo-600 text-center hover:underline flex items-center justify-center gap-2">
+        <Link href="/" className="mt-3 text-indigo-600 dark:text-indigo-400 text-center hover:underline flex items-center justify-center gap-2 text-xs">
           <FaArrowLeft />
           Back to Home
         </Link>

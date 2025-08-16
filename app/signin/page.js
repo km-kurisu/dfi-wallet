@@ -53,13 +53,13 @@ export default function SignIn() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 bg-white dark:bg-slate-950 transition-colors duration-300">
-      <div className="w-full max-w-md sm:max-w-sm bg-white dark:bg-slate-900/50 backdrop-blur-xl border border-white/20 dark:border-slate-800/30 p-6 sm:p-8 rounded-2xl shadow-2xl">
-  <div className="text-center mb-6">
-    <FaSignInAlt className="text-4xl text-indigo-600 dark:text-indigo-400 mx-auto mb-2" />
-    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Sign In</h2>
-  </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-white to-slate-200 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+      <div className="mx-auto w-[340px] h-auto min-h-[420px] max-w-[90vw] bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl p-5 flex flex-col gap-4">
+        <div className="text-center mb-4">
+          <FaSignInAlt className="text-3xl text-indigo-600 dark:text-indigo-400 mx-auto mb-1" />
+          <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Sign In</h2>
+        </div>
+  <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           {error && (
             <div className="bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl backdrop-blur-sm">
               {error}
@@ -97,13 +97,13 @@ export default function SignIn() {
           <button 
             type="submit" 
             disabled={loading}
-            className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white px-4 py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow transition-all duration-200 mt-1 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
         
-        <div className="mt-6">
+  <div className="mt-4">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-white/20 dark:border-slate-700/50"></div>
@@ -119,7 +119,7 @@ export default function SignIn() {
             type="button"
             onClick={handleGoogleSignIn}
             disabled={loading}
-            className="w-full mt-4 flex items-center justify-center gap-2 bg-white text-slate-800 dark:bg-slate-800 dark:text-white px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full mt-3 flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-200 shadow disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -131,12 +131,12 @@ export default function SignIn() {
           </button>
         </div>
         
-        <p className="mt-6 text-center text-slate-700 dark:text-slate-300">
+  <p className="mt-4 text-center text-slate-700 dark:text-slate-300 text-xs">
           Don't have an account?{' '}
           <Link href="/onboarding" className="text-indigo-600 hover:underline">Onboard</Link>
         </p>
         
-        <Link href="/" className="mt-6 text-indigo-600 dark:text-indigo-400 text-center hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors flex items-center justify-center gap-2">
+        <Link href="/" className="mt-3 text-indigo-600 dark:text-indigo-400 text-center hover:underline flex items-center justify-center gap-2 text-xs">
           <FaArrowLeft className="text-sm" />
           Back to Home
         </Link>
