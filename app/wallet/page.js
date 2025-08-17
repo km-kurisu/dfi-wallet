@@ -16,10 +16,15 @@ import {
   FaUserCircle,
   FaCheckCircle
 } from 'react-icons/fa';
+
 import { useAuth } from "../../contexts/AuthContext";
 import { useBlockchainWallet } from "../../contexts/BlockchainWalletContext";
+
+import { AnimatedSection } from "../../components/AnimatedSection";
+import { motion } from "framer-motion";
 import MetaMaskPrompt from "../../components/MetaMaskPrompt";
 import NetworkSelector from "../../components/NetworkSelector";
+
 
 export default function Wallet() {
   const { user, updateUserData } = useAuth();
@@ -302,30 +307,46 @@ export default function Wallet() {
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 overflow-guard">
       <MetaMaskPrompt show={showMetaMaskPrompt} onClose={handleCloseMetaMaskPrompt} />
-      <div className="responsive-container max-w-lg mx-auto mt-12">
-        <div className="card card-body flex flex-col items-center">
-  <div className="text-center mb-6 section">
-          <FaWallet className="text-3xl sm:text-4xl text-violet-600 dark:text-violet-400 mx-auto mb-2" />
-          <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-slate-100">Blockchain Wallet</h2>
-          {account && (
-            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              {ensName ? ensName : `${account.slice(0, 6)}...${account.slice(-4)}`}
-            </p>
-          )}
-        </div>
+  <div className="w-full max-w-5xl mx-auto mt-8 sm:mt-12 flex flex-col items-center gap-4 sm:gap-6 px-2 sm:px-8">
+        <AnimatedSection layout delay={0.1}>
+          <motion.div
+            className="card card-body flex flex-col items-center w-full min-w-[320px] px-2 sm:px-8"
+            layout
+            transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+          >
+            <motion.div
+              className="text-center mb-4 sm:mb-6 section"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px 0px' }}
+              transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.1 }}
+            >
+              <FaWallet className="text-2xl sm:text-3xl md:text-4xl text-violet-600 dark:text-violet-400 mx-auto mb-2" />
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-slate-100">Blockchain Wallet</h2>
+              {account && (
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+                  {ensName ? ensName : `${account.slice(0, 6)}...${account.slice(-4)}`}
+                </p>
+              )}
+            </motion.div>
         
         {/* Error Message */}
         {error && (
-          <div className="w-full p-3 bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 rounded-xl backdrop-blur-sm mb-4 flex items-center gap-2">
+          <motion.div
+            className="w-full p-2 sm:p-3 bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 rounded-xl backdrop-blur-sm mb-3 sm:mb-4 flex items-center gap-2 text-xs sm:text-sm"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+          >
             <FaExclamationTriangle className="flex-shrink-0" />
-            <span className="text-sm">{error}</span>
-          </div>
+            <span>{error}</span>
+          </motion.div>
         )}
         
         {!user ? (
-          <div className="text-center mb-4 w-full">
-            <p className="text-slate-700 dark:text-slate-300 mb-4">Please sign in to connect your wallet</p>
-            <Link href="/signin" className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 block w-full text-center">
+          <div className="text-center mb-3 sm:mb-4 w-full">
+            <p className="text-slate-700 dark:text-slate-300 mb-3 sm:mb-4 text-xs sm:text-sm">Please sign in to connect your wallet</p>
+            <Link href="/signin" className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 block w-full text-center text-xs sm:text-sm">
               Sign In
             </Link>
           </div>
@@ -333,7 +354,7 @@ export default function Wallet() {
           <button 
             onClick={handleConnectWallet} 
             disabled={isConnecting}
-            className="bg-violet-600 text-white px-4 py-3 rounded-xl hover:bg-violet-700 mb-4 w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all text-sm sm:text-base"
+            className="bg-violet-600 text-white px-4 py-2 sm:py-3 rounded-xl hover:bg-violet-700 mb-3 sm:mb-4 w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all text-xs sm:text-base min-h-[44px]"
           >
             {isConnecting ? (
               <>
@@ -355,19 +376,26 @@ export default function Wallet() {
         )}
 
         {/* Wallet Debug Info */}
-        <div className="w-full p-3 mb-4 bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-xl text-blue-800 dark:text-blue-300 text-xs">
+        <motion.div
+          className="w-full max-w-full p-2 sm:p-3 mb-3 sm:mb-4 bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-xl text-blue-800 dark:text-blue-300 text-xs"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px 0px' }}
+          transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.15 }}
+        >
           <div className="mb-1 font-semibold">Connection State:</div>
           <div>Account: {account ? 'Connected' : 'Not Connected'}</div>
           <div>Balance: {balance ? `${parseFloat(balance).toFixed(6)} ETH` : 'Not Available'}</div>
           <div>Network ID: {chainId || 'Unknown'}</div>
           <div>Provider: {provider ? 'Available' : 'Not Available'}</div>
-        </div>
+        </motion.div>
 
         {/* Wallet Info */}
         {account && (
-          <div className="w-full space-y-3">
+          <AnimatedSection layout delay={0.18}>
+            <motion.div className="w-full space-y-3" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
             {/* Wallet Identity Section */}
-            <div className="w-full p-4 bg-white dark:bg-indigo-900/30 backdrop-blur-md border border-slate-200 dark:border-indigo-700/50 rounded-xl flex flex-col">
+            <motion.div className="w-full p-4 bg-white dark:bg-indigo-900/30 backdrop-blur-md border border-slate-200 dark:border-indigo-700/50 rounded-xl flex flex-col" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
               {/* ENS Name if available */}
               {ensName && (
                 <div className="flex items-center justify-between mb-2">
@@ -397,10 +425,10 @@ export default function Wallet() {
                   )}
                 </button>
               </div>
-            </div>
+            </motion.div>
             
             {/* Balance Card */}
-            <div className="w-full p-4 bg-white dark:bg-blue-900/30 border border-slate-200 dark:border-blue-700/50 rounded-xl flex flex-col">
+            <motion.div className="w-full p-4 bg-white dark:bg-blue-900/30 border border-slate-200 dark:border-blue-700/50 rounded-xl flex flex-col" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs text-black dark:text-slate-400 font-medium">Total Balance:</span>
                 <FaEthereum className="text-blue-600 dark:text-blue-400" />
@@ -417,20 +445,20 @@ export default function Wallet() {
                   ≈ $${(parseFloat(balance) * 3450).toFixed(2)} USD
                 </div>
               )}
-            </div>
+            </motion.div>
             
             {/* Network Info */}
-            <div className="w-full p-3 bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700/50 rounded-xl flex items-center justify-between">
+            <motion.div className="w-full p-3 bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700/50 rounded-xl flex items-center justify-between" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
               <div>
                 <span className="block text-xs text-black dark:text-slate-400 mb-1 font-medium">Network:</span>
                 <NetworkSelector />
               </div>
               <FaNetworkWired className="text-violet-600 dark:text-violet-400" />
-            </div>
+            </motion.div>
             
             {/* Gas Price */}
             {gasPrice && (
-              <div className="w-full p-3 bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700/50 rounded-xl flex items-center justify-between">
+              <motion.div className="w-full p-3 bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700/50 rounded-xl flex items-center justify-between" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
                 <div>
                   <span className="block text-xs text-black dark:text-slate-400 mb-1 font-medium">Current Gas Price:</span>
                   <p className="text-sm text-black dark:text-slate-300">
@@ -440,11 +468,11 @@ export default function Wallet() {
                   </p>
                 </div>
                 <FaGasPump className="text-violet-600 dark:text-violet-400" />
-              </div>
+              </motion.div>
             )}
             
             {/* Actions Section */}
-            <div className="w-full grid grid-cols-2 gap-3">
+            <motion.div className="w-full grid grid-cols-2 gap-3" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
               {/* Send Transaction Button */}
               <button 
                 onClick={() => setShowSend(!showSend)} 
@@ -462,10 +490,10 @@ export default function Wallet() {
                 <FaHistory className="flex-shrink-0" />
                 <span>{showTxHistory ? 'Hide History' : 'Transactions'}</span>
               </button>
-            </div>
+            </motion.div>
             
             {/* Wallet Assets Section */}
-            <div className="w-full p-4 bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl">
+            <motion.div className="w-full p-4 bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
               <h3 className="text-sm font-medium text-black dark:text-slate-300 mb-3 flex items-center gap-2">
                 <FaChartPie className="text-indigo-600 dark:text-indigo-400" />
                 Assets
@@ -491,11 +519,11 @@ export default function Wallet() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
             
             {/* Transaction History */}
             {showTxHistory && txHistory && (
-              <div className="w-full p-4 bg-white/40 dark:bg-slate-800/40 rounded-xl">
+              <motion.div className="w-full p-4 bg-white/40 dark:bg-slate-800/40 rounded-xl" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
                 <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
                   <FaHistory className="text-indigo-600 dark:text-indigo-400" />
                   Recent Transactions
@@ -545,12 +573,12 @@ export default function Wallet() {
                     View all transactions on Etherscan
                   </a>
                 </div>
-              </div>
+              </motion.div>
             )}
             
             {/* Send Transaction Form */}
             {showSend && (
-              <form onSubmit={handleSendTransaction} className="w-full p-4 bg-white/40 dark:bg-slate-800/40 rounded-xl space-y-3">
+              <motion.form onSubmit={handleSendTransaction} className="w-full p-4 bg-white/40 dark:bg-slate-800/40 rounded-xl space-y-3" layout transition={{ type: 'spring', stiffness: 120, damping: 18 }}>
                 <div>
                   <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1 font-medium">Recipient Address:</label>
                   <input 
@@ -606,28 +634,53 @@ export default function Wallet() {
                     ) : null}
                   </div>
                 )}
-              </form>
+              </motion.form>
             )}
-          </div>
+            </motion.div>
+          </AnimatedSection>
         )}
         
         {!account && !user && (
-          <div className="w-full p-4 bg-violet-600/10 dark:bg-violet-600/20 rounded-xl mt-4">
+          <motion.div
+            className="w-full p-4 bg-violet-600/10 dark:bg-violet-600/20 rounded-xl mt-4"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px 0px' }}
+            transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.18 }}
+          >
             <p className="text-sm text-violet-700 dark:text-violet-400 text-center">
               Connect your MetaMask wallet to access DeFi services
             </p>
-          </div>
+          </motion.div>
         )}
         
         {/* Troubleshooting Section */}
         {account && !balance && (
-          <div className="w-full p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-xl mt-4">
+          <motion.div
+            className="w-full p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-xl mt-4"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px 0px' }}
+            transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.18 }}
+          >
             <h3 className="font-medium text-yellow-800 dark:text-yellow-500 mb-2">Troubleshooting</h3>
             <ul className="list-disc list-inside text-sm space-y-1 text-yellow-700 dark:text-yellow-400">
-              <li>Wallet connected but details not showing? Try refreshing the page</li>
-              <li>Ensure you're on a supported network (Ethereum, Goerli, Sepolia, Mumbai)</li>
-              <li>Check MetaMask is unlocked and connected to this site</li>
-              <li>Try disconnecting and reconnecting your wallet</li>
+              {[
+                "Wallet connected but details not showing? Try refreshing the page",
+                "Ensure you're on a supported network (Ethereum, Goerli, Sepolia, Mumbai)",
+                "Check MetaMask is unlocked and connected to this site",
+                "Try disconnecting and reconnecting your wallet"
+              ].map((text, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-80px 0px' }}
+                  transition={{ type: 'spring', stiffness: 120, damping: 18, delay: i * 0.13 }}
+                >
+                  {text}
+                </motion.li>
+              ))}
             </ul>
             <button 
               onClick={() => window.location.reload()}
@@ -635,14 +688,18 @@ export default function Wallet() {
             >
               Refresh Page
             </button>
-          </div>
+          </motion.div>
         )}
         
-        <Link href="/" className="mt-6 text-indigo-600 dark:text-indigo-400 text-center hover:underline flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-colors hover:bg-indigo-50 dark:hover:bg-indigo-900/20">
-          <FaArrowLeft className="flex-shrink-0" />
-          <span>Back to Home</span>
-        </Link>
-        </div>
+        <AnimatedSection delay={0.22}>
+          <Link href="/" className="mt-6 text-indigo-600 dark:text-indigo-400 text-center hover:underline flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-colors hover:bg-indigo-50 dark:hover:bg-indigo-900/20">
+            <FaArrowLeft className="flex-shrink-0" />
+            <span>Back to Home</span>
+          </Link>
+        </AnimatedSection>
+  {/* Market Analysis Chart removed; now on its own page */}
+          </motion.div>
+        </AnimatedSection>
       </div>
     </main>
   );

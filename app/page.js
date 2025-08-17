@@ -1,10 +1,12 @@
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
-import { FaUserPlus, FaWallet, FaIdCard, FaReact, FaCss3Alt, FaEthereum, FaMobile, FaHome } from 'react-icons/fa';
+import { FaUserPlus, FaWallet, FaIdCard, FaReact, FaCss3Alt, FaEthereum, FaMobile, FaHome, FaChartPie, FaUser } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiFramer } from 'react-icons/si';
 import HomeRedirect from "./HomeRedirect";
 import { useAuth } from "../contexts/AuthContext";
+import { AnimatedSection } from "../components/AnimatedSection";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const { user } = useAuth();
@@ -40,10 +42,75 @@ export default function Home() {
           </nav>
         </div>
 
-        <header className="my-8 sm:my-12 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-slate-900 dark:text-white leading-tight">Digital Financial Inclusion for the Unbanked</h1>
-          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-200 max-w-2xl mx-auto">Mobile-first wallets, lightweight blockchain integration, and privacy-preserving digital identity verification to reduce onboarding friction for underserved populations.</p>
-        </header>
+
+        <AnimatedSection delay={0.1}>
+          <header className="my-8 sm:my-12 text-center">
+            <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-slate-900 dark:text-white leading-tight">Welcome to DFI Wallet</h1>
+            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-200 max-w-2xl mx-auto">A simple, secure, and user-friendly platform for digital financial inclusion. Follow the steps below to get started and explore all features.</p>
+          </header>
+        </AnimatedSection>
+
+        <section className="mb-8 sm:mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <AnimatedSection delay={0.2}>
+            {/* Step 1: Create Account */}
+            <div className="flex flex-col items-center bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-2xl p-6 shadow-xl">
+              <FaUserPlus className="text-4xl text-indigo-600 dark:text-indigo-400 mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">1. Create Your Account</h3>
+              <p className="text-slate-700 dark:text-slate-300 text-center mb-2">Go to <b>Get Started</b> or <b>Onboarding</b> and fill in your name, email, and password, or use Google sign-in. After registering, you’ll be redirected to your wallet.</p>
+              <Link href="/onboarding" className="mt-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center gap-2 transition-colors shadow-md">
+                <FaUserPlus /> <span>Get Started</span>
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.3}>
+            {/* Step 2: Verify Identity */}
+            <div className="flex flex-col items-center bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-2xl p-6 shadow-xl">
+              <FaIdCard className="text-4xl text-fuchsia-600 dark:text-fuchsia-400 mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">2. Verify Your Identity</h3>
+              <p className="text-slate-700 dark:text-slate-300 text-center mb-2">Go to <b>ID Verify</b> and follow the prompts to upload a document and a short video. The system will process your submission and update your verification status.</p>
+              <Link href="/verify" className="mt-2 px-4 py-2 bg-fuchsia-600 text-white rounded-lg hover:bg-fuchsia-700 flex items-center gap-2 transition-colors shadow-md">
+                <FaIdCard /> <span>ID Verify</span>
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.4}>
+            {/* Step 3: Connect Wallet */}
+            <div className="flex flex-col items-center bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-2xl p-6 shadow-xl">
+              <FaWallet className="text-4xl text-violet-600 dark:text-violet-400 mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">3. Connect Your Wallet</h3>
+              <p className="text-slate-700 dark:text-slate-300 text-center mb-2">Go to the <b>Wallet</b> page and click <b>Connect MetaMask</b>. Follow the prompts to link your Ethereum wallet. You can view your balance, send transactions, and see your transaction history.</p>
+              <Link href="/wallet" className="mt-2 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 flex items-center gap-2 transition-colors shadow-md">
+                <FaWallet /> <span>Wallet</span>
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.5}>
+            {/* Step 4: Market Analysis */}
+            <div className="flex flex-col items-center bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-2xl p-6 shadow-xl">
+              <FaChartPie className="text-4xl text-indigo-500 dark:text-indigo-300 mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">4. Market Analysis</h3>
+              <p className="text-slate-700 dark:text-slate-300 text-center mb-2">Visit <b>Market Analysis</b> to view live Ethereum price trends and AI-powered insights. Stay informed about the crypto market directly from your dashboard.</p>
+              <Link href="/market-analysis" className="mt-2 px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 flex items-center gap-2 transition-colors shadow-md">
+                <FaChartPie /> <span>Market Analysis</span>
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.6}>
+            {/* Step 5: Profile & Navigation */}
+            <div className="flex flex-col items-center bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-2xl p-6 shadow-xl md:col-span-2">
+              <FaUser className="text-4xl text-slate-700 dark:text-slate-200 mb-3" />
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-slate-100">5. Profile & Navigation</h3>
+              <p className="text-slate-700 dark:text-slate-300 text-center mb-2">Use the navigation bar at the top to access all pages. Visit your <b>Profile</b> to view or edit your account details and see your verification status. Use the floating theme toggle to switch between light and dark modes anytime.</p>
+              <Link href="/profile" className="mt-2 px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 flex items-center gap-2 transition-colors shadow-md">
+                <FaUser /> <span>Profile</span>
+              </Link>
+            </div>
+          </AnimatedSection>
+        </section>
 
   <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
           <div className="p-4 sm:p-6 rounded-2xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-2xl transition-transform hover:scale-[1.01]">
@@ -53,12 +120,32 @@ export default function Home() {
 
           <div className="p-4 sm:p-6 rounded-2xl bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 shadow-2xl transition-transform hover:scale-[1.01]">
             <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mb-2">Key features</h2>
-            <ul className="list-disc pl-5 text-sm sm:text-base text-slate-700 dark:text-slate-300 space-y-1">
-              <li>Onboarding form with minimal fields and progressive verification.</li>
-              <li>Blockchain wallet connect (MetaMask) for secure payments/identity anchors.</li>
-              <li>Digital identity verification mock (file upload + status) to illustrate flow.</li>
-              <li>Dark/light theme with accessible colors and glass UI elements.</li>
-            </ul>
+            <motion.ul
+              className="list-disc pl-5 text-sm sm:text-base text-slate-700 dark:text-slate-300 space-y-1"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px 0px' }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.13 } }
+              }}
+            >
+              {["Onboarding form with minimal fields and progressive verification.",
+                "Blockchain wallet connect (MetaMask) for secure payments/identity anchors.",
+                "Digital identity verification mock (file upload + status) to illustrate flow.",
+                "Dark/light theme with accessible colors and glass UI elements."]
+              .map((text, i) => (
+                <motion.li
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, x: -24 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: i * 0.08 } }
+                  }}
+                >
+                  {text}
+                </motion.li>
+              ))}
+            </motion.ul>
           </div>
         </section>
 
@@ -98,27 +185,35 @@ export default function Home() {
 
         <section className="mb-8 sm:mb-12 bg-white/20 dark:bg-slate-900/20 backdrop-blur-2xl border border-white/20 dark:border-slate-800/30 rounded-xl p-4 sm:p-6 shadow-xl">
           <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mb-3">How to try it</h3>
-          <ol className="list-decimal pl-5 sm:pl-6 text-sm sm:text-base text-slate-700 dark:text-slate-300 space-y-2">
-            <li>Open <strong>Get Started</strong> to simulate onboarding and identity verification.</li>
-            <li>Use <strong>Wallet</strong> to connect MetaMask (or a browser wallet) to test account flows.</li>
-            <li>Toggle theme using the floating button or navbar toggle to test light/dark modes.</li>
-          </ol>
+          <motion.ol
+            className="list-decimal pl-5 sm:pl-6 text-sm sm:text-base text-slate-700 dark:text-slate-300 space-y-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px 0px' }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.13 } }
+            }}
+          >
+            {[
+              <>Open <strong>Get Started</strong> to simulate onboarding and identity verification.</>,
+              <>Use <strong>Wallet</strong> to connect MetaMask (or a browser wallet) to test account flows.</>,
+              <>Toggle theme using the floating button or navbar toggle to test light/dark modes.</>
+            ].map((el, i) => (
+              <motion.li
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, x: -24 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: i * 0.08 } }
+                }}
+              >
+                {el}
+              </motion.li>
+            ))}
+          </motion.ol>
         </section>
 
-        <nav className="p-3 flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center mb-8">
-          <Link href="/onboarding" className="px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center justify-center gap-2 transition-colors shadow-md hover:shadow-lg">
-            <FaUserPlus />
-            <span className="font-medium">Get Started</span>
-          </Link>
-          <Link href="/wallet" className="px-4 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 flex items-center justify-center gap-2 transition-colors shadow-md hover:shadow-lg">
-            <FaWallet />
-            <span className="font-medium">Wallet</span>
-          </Link>
-          <Link href="/verify" className="px-4 py-3 bg-fuchsia-600 text-white rounded-lg hover:bg-fuchsia-700 flex items-center justify-center gap-2 transition-colors shadow-md hover:shadow-lg">
-            <FaIdCard />
-            <span className="font-medium">Identity Verification</span>
-          </Link>
-        </nav>
+        
       </div>
     </main>
   );
