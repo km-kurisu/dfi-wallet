@@ -82,10 +82,11 @@ export default function Verify() {
         const form = new FormData();
         form.append('document', formData.document);
         form.append('video', formData.video);
-        form.append('fullName', formData.fullName);
+        form.append('full_name', formData.fullName);
 
-        // Use fetch with ReadableStream to handle progress updates
-        const res = await fetch('/api/verify', {
+        // Use the Python API endpoint (set in env or fallback)
+        const apiUrl = process.env.NEXT_PUBLIC_PYTHON_API_URL || 'https://your-python-api-url.onrender.com/api/verify';
+        const res = await fetch(apiUrl, {
           method: 'POST',
           body: form
         });
