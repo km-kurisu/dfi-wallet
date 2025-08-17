@@ -1,5 +1,7 @@
+
+
+
 from flask import Flask, request, jsonify
-import requests
 import pytesseract
 import cv2
 from deepface import DeepFace
@@ -11,15 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Set tesseract path if needed (comment out if not required on server)
-pytesseract.pytesseract.tesseract_cmd = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
-
-def download_file(url):
-    local_fd, local_path = tempfile.mkstemp()
-    os.close(local_fd)
-    response = requests.get(url)
-    with open(local_path, 'wb') as f:
-        f.write(response.content)
-    return local_path
+# pytesseract.pytesseract.tesseract_cmd = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
 
 def extract_face(image):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -68,15 +62,21 @@ def verify_full_name(extracted_text, provided_name):
 
 @app.route('/api/verify', methods=['POST'])
 def api_verify():
-    data = request.json
-    document_url = data.get('document_url')
-    video_url = data.get('video_url')
-    full_name = data.get('full_name')
-    if not document_url or not video_url or not full_name:
+    # Accept multipart/form-data with 'document', 'video', and 'full_name'
+    if 'document' not in request.files or 'video' not in request.files or 'full_name' not in request.form:
         return jsonify({'error': 'Missing required fields'}), 400
-    # Download files
-    doc_path = download_file(document_url)
-    vid_path = download_file(video_url)
+    document = request.files['document']
+    video = request.files['video']
+    full_name = request.form['full_name']
+
+    # Save files to temp paths
+    doc_fd, doc_path = tempfile.mkstemp(suffix=os.path.splitext(document.filename)[-1])
+    os.close(doc_fd)
+    document.save(doc_path)
+    vid_fd, vid_path = tempfile.mkstemp(suffix=os.path.splitext(video.filename)[-1])
+    os.close(vid_fd)
+    video.save(vid_path)
+
     # Document verification
     extracted_text, doc_face_path = verify_document(doc_path)
     # Video face extraction
