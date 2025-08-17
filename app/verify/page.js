@@ -85,7 +85,7 @@ export default function Verify() {
         form.append('full_name', formData.fullName);
 
         // Use the Python API endpoint (set in env or fallback)
-        const apiUrl = process.env.NEXT_PUBLIC_PYTHON_API_URL || 'https://py-api-y38w.onrender.com/api/verify';
+        const apiUrl = process.env.NEXT_PUBLIC_PYTHON_API_URL || 'https://kurisu015-py-api.hf.space/api/verify';
         const res = await fetch(apiUrl, {
           method: 'POST',
           body: form
